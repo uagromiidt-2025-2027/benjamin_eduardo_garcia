@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Perfil Académico</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
+
+    <style>
+        :root {
+            --rojo: #BC2132;
+            --azul: #1a263f;
+        }
+
+        /* GENERAL */
+        body {
+            background: #f5f5f5;
+            color: #111;
+            font-family: "Segoe UI", Tahoma, sans-serif;
+        }
+
+        /* ================= ANIMACIONES ================= */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        @keyframes lineLeft {
+            from {
+                width: 0
+            }
+
+            to {
+                width: 100%
+            }
+        }
+
+        @keyframes lineRight {
+            from {
+                width: 0
+            }
+
+            to {
+                width: 100%
+            }
+        }
+
+        /* ================= HEADER ================= */
+        .header-profile {
+            position: relative;
+            background:
+                linear-gradient(135deg, rgba(0, 19, 77, .96), rgba(26, 47, 120, .96)),
+                radial-gradient(circle at top right, rgba(255, 255, 255, .12), transparent 55%);
+            color: #fff;
+            overflow: hidden;
+            animation: fadeUp .9s ease forwards;
+        }
+
+        .header-profile::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at left center, rgba(255, 255, 255, .08), transparent 60%);
+        }
+
+        .header-profile::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(270deg, var(--rojo), transparent);
+            animation: lineRight 1.2s ease forwards;
+        }
+
+        .header-profile .line-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--rojo), transparent);
+            animation: lineLeft 1.2s ease forwards;
+        }
+
+        /* IMAGEN */
+        .profile-img {
+            border-radius: 22px;
+            background: #fff;
+            padding: 6px;
+            max-width: 260px;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, .45);
+            animation: fadeUp .9s ease .2s forwards;
+            opacity: 0;
+        }
+
+        /* TEXTO */
+        .header-profile h1 {
+            font-size: clamp(1.8rem, 3vw, 2.6rem);
+            font-weight: 800;
+            animation: fadeUp .9s ease .35s forwards;
+            opacity: 0;
+        }
+
+        .header-profile h6 {
+            color: var(--rojo);
+            font-weight: 700;
+            animation: fadeUp .9s ease .5s forwards;
+            opacity: 0;
+        }
+
+        .header-profile p {
+            max-width: 760px;
+            animation: fadeUp .9s ease .65s forwards;
+            opacity: 0;
+        }
+
+        /* ================= TESIS ================= */
+        .thesis-preview {
+            background: #fff;
+            border-radius: 14px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, .12);
+            max-width: 760px;
+            margin: auto;
+        }
+
+        .thesis-badge {
+            background: var(--rojo);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-size: 11px;
+        }
+
+        .thesis-title {
+            font-weight: 700;
+            color: var(--azul);
+            margin: 1rem 0;
+        }
+
+        /* ================= CARDS ================= */
+        .card-custom {
+            border-radius: 14px;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, .12);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-custom .ratio,
+        .card-custom img {
+            flex-grow: 1;
+        }
+
+        .card-custom a.btn {
+            margin-top: auto;
+        }
+
+        /* ============================== FOOTER ============================== */
+        .footer-miidt {
+            background: #00134d;
+            color: #ffffff;
+            font-size: 14px;
+            position: relative;
+        }
+
+        .footer-miidt .container {
+            max-width: 1100px
+        }
+
+        .footer-miidt a {
+            color: #ffffff;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .footer-miidt a:hover {
+            color: #b7b7b7;
+            text-decoration: underline;
+        }
+
+        .footer-miidt .brand,
+        .footer-miidt .fw-bold {
+            font-size: 15px;
+            letter-spacing: .5px;
+        }
+
+        .footer-miidt p {
+            line-height: 1.55;
+            margin-bottom: .35rem;
+        }
+
+        .footer-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, .15);
+            opacity: .35;
+        }
+
+        .social-icon {
+            width: 42px;
+            height: 42px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #1a2f78;
+            font-size: 20px;
+            color: #ffffff;
+            transition: .3s;
+        }
+
+        .social-icon:hover {
+            background: #9B0C0C
+        }
+
+        .footer-right {
+            position: absolute;
+            right: 28%;
+            transform: translateX(50%);
+            bottom: 1.05rem;
+            font-size: 13px;
+            opacity: .75;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 991px) {
+            .footer-right {
+                position: static;
+                transform: none;
+                margin-top: .75rem;
+                text-align: center;
+                width: 100%;
+            }
+        }
+
+        /* ================= TÍTULOS DE SECCIÓN ================= */
+        main h2 {
+            position: relative;
+            display: inline-block;
+            font-size: clamp(1.3rem, 2vw, 1.6rem);
+            font-weight: 800;
+            color: var(--azul);
+            letter-spacing: .5px;
+            margin-bottom: 2rem;
+            padding-bottom: .6rem;
+            opacity: 0;
+            animation: fadeUp .7s ease forwards;
+        }
+
+        main h2::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 55%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--rojo), transparent);
+            border-radius: 999px;
+        }
+
+        main h2::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: -8px;
+            width: 32px;
+            height: 3px;
+            background: var(--rojo);
+            border-radius: 999px;
+            opacity: .8;
+        }
+
+        /* ================== MEJORA CONGRESO: iframe e imágenes “se vean bien” ================== */
+        /* No cambia colores. Solo asegura proporciones y recorte bonito. */
+        .card-custom .ratio {
+            border-radius: .5rem;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        .card-custom .ratio iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
+        }
+
+        .card-custom .congreso-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Extra: evita que el iframe de Drive haga scroll raro dentro del card */
+        .card-custom iframe {
+            max-width: 100%
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header-profile py-5">
+        <div class="line-bottom"></div>
+        <div class="container">
+            <div class="row align-items-center g-4">
+                <div class="col-md-4 text-center">
+                    <img src="https://lh3.googleusercontent.com/d/1TWz-mhMvR75FRX_bok9vie-KqwOCOQF0"
+                        class="profile-img img-fluid" alt="Perfil" />
+                </div>
+                <div class="col-md-8">
+                    <h1>Benjamin Eduardo García Muñoz</h1>
+                    <h6>CVU: 1152394</h6>
+                    <p>Ingeniero en Mecatrónica</p>
+                    <p>Ingeniero Constructor</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- TESIS -->
+    <section class="py-4">
+        <div class="container">
+            <div class="thesis-preview">
+                <span class="thesis-badge">Tesis</span>
+                <div class="thesis-title">
+                    Desarrollo e implementación de un sistema LIDAR aéreo-transportado para el análisis de entornos
+                    urbanos.
+                </div>
+                <div class="ratio ratio-16x9">
+                    <iframe src="https://drive.google.com/file/d/1PBzwTGE9e05euRwsQzhrK7IVdTEr_Pc2/preview"
+                        allow="autoplay" allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN -->
+    <main class="py-5">
+        <div class="container">
+
+            <!-- VIDEOS -->
+            <section class="mb-5">
+                <h2 class="mb-4">Videos</h2>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="card card-custom p-3 h-100">
+                            <div class="ratio ratio-16x9">
+                                <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe>
+                            </div>
+                            <p class="mt-3 mb-0"></p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card card-custom p-3 h-100">
+                            <div class="ratio ratio-16x9">
+                                <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe>
+                            </div>
+                            <p class="mt-3 mb-0"></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CONGRESO -->
+            <section class="mb-5">
+                <h2 class="mb-4">Congreso CIEDYT</h2>
+                <div class="row g-4">
+
+                    <!-- CARD PRESENTACIÓN -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card card-custom p-3 h-100">
+                            <div class="ratio ratio-16x9">
+                                <iframe src="https://drive.google.com/file/d/1RO8XgBbbBJx28bBPlOtJruW7yRdvFDiJ/preview"
+                                    allow="autoplay" allowfullscreen loading="lazy">
+                                </iframe>
+                            </div>
+                            <h6 class="fw-bold mt-3">Presentación inicial</h6>
+                            <a href="https://drive.google.com/file/d/1RO8XgBbbBJx28bBPlOtJruW7yRdvFDiJ" target="_blank"
+                                class="btn btn-outline-danger btn-sm mt-2">
+                                Ver completa
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- CARD IMAGEN (SIN BOTÓN) -->
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card card-custom p-3 h-100">
+                            <div class="ratio ratio-16x9">
+                                <img src="https://lh3.googleusercontent.com/d/1BjQcvIsCMdM2txkAdkJkzNj_h_YLZAag"
+                                    class="congreso-img" alt="Constancia CIEDYT">
+                            </div>
+                            <h6 class="fw-bold mt-3">Constancia CIEDYT</h6>
+                        </div>
+                    </div>
+
+                    <!-- EXTRA 1 (con botón) 
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card card-custom p-3 h-100">
+                            <div class="ratio ratio-16x9">
+                                <img src="https://lh3.googleusercontent.com/d/"
+                                    class="congreso-img" alt="Captura CIEDYT">
+                            </div>
+                            <h6 class="fw-bold mt-3">Captura CIEDYT</h6>
+                        </div>
+                    </div>
+                    -->
+
+                </div>
+            </section>
+
+            <!-- EVIDENCIAS -->
+            <section>
+                <h2 class="mb-4">Otros</h2>
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card card-custom p-3 h-100">
+                            <img src="https://lh3.googleusercontent.com/d/1TOvMshz2qYsM0bAM05398Nmdv2rvcg6T"
+                                class="img-fluid rounded" alt="Imagen Congreso CIEDYT">
+                            <h6 class="fw-bold mt-3">Contancia Campaña de Reforestación</h6>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card card-custom p-3 h-100">
+                            <img src="https://lh3.googleusercontent.com/d/1Qkf6wbwDFVK9k1aixFl8JKJVysQsO07B"
+                                class="img-fluid rounded" alt="Imagen Congreso CIEDYT">
+                            <h6 class="fw-bold mt-3">Reconocimiento IGIFE</h6>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer-miidt pt-4 pb-3 mt-5">
+        <div class="container">
+            <div class="row align-items-start">
+
+                <!-- IZQUIERDA: CONTACTO -->
+                <div class="col-12 col-md-7 text-center text-md-start">
+                    <div class="fw-bold mb-2">Contacto</div>
+
+                    <p class="mb-1">
+                        Dr. René Edmundo Cuevas Valencia<br />
+                        <span class="opacity-75">
+                            Coordinador de la Maestría en Ingeniería para la Innovación y Desarrollo Tecnológico
+                        </span>
+                    </p>
+
+                    <p class="mb-1 opacity-75">
+                        Av. Lázaro Cárdenas S/N, Ciudad Universitaria,<br />
+                        Chilpancingo, Gro., C.P. 39090
+                    </p>
+
+                    <p class="mb-1 opacity-75">Tel. (747) 471 9310 ext. 4153</p>
+
+                    <p class="mb-0">
+                        <a href="mailto:miidt@uagro.mx">miidt@uagro.mx</a>
+                    </p>
+                </div>
+
+                <!-- DERECHA: MIIDT + FB + DERECHOS -->
+                <div class="col-12 col-md-5 text-center text-md-end mt-4 mt-md-0 d-flex flex-column">
+                    <div>
+                        <div class="brand mb-1">Visita la página oficial de la maestría</div>
+                        <a href="https://miidt.uagro.mx/" target="_blank">MIIDT</a>
+
+                        <div class="mt-3">
+                            <a href="https://www.facebook.com/share/1PAkvGwqVY/?mibextid=wwXIfr" target="_blank"
+                                class="social-icon">
+                                <i class="bi bi-facebook"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="footer-right">© 2025 · Derechos reservados</div>
+                </div>
+
+            </div>
+
+            <div class="footer-divider my-3"></div>
+
+            <div class="text-center small opacity-75">
+                Ingeniería · Tecnología · Innovación
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
